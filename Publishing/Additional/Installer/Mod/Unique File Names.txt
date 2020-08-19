@@ -1,0 +1,8 @@
+NeonOcean.S4.Refer.archive
+NeonOcean.S4.Refer-License.html
+NeonOcean.S4.Refer-NeonOcean-Load-Order.json
+NeonOcean.S4.Refer-NeonOcean-Mod.json
+NeonOcean.S4.Refer-Package.package
+NeonOcean.S4.Refer-Uninstall-Files.txt
+NeonOcean.S4.Refer-Uninstall.exe
+NeonOcean.S4.Refer-Uninstall.exe.config

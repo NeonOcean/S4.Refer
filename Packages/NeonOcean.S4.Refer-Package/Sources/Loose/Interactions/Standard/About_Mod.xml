@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<I n="NeonOcean_S4_Refer_Interactions_Standard_About_Mod" s="2251456641307287006" i="interaction" m="NeonOcean.S4.Refer.Interactions.Standard" c="AboutModInteraction">
+	<T n="display_name">1265536675</T>
+	<T n="category">5245337334449623996<!--PieMenuCategory: NeonOcean_S4_Refer_Interaction_Categories_Refer--></T>
+	<V n="_saveable" t="disabled" />
+	<L n="basic_extras">
+		<V t="do_command">
+			<U n="do_command">
+				<T n="command">neonocean.s4.refer.standard.about_mod</T>
+			</U>
+		</V>
+	</L>
+	<L n="ObjectRegistrationInformation">
+		<V t="byType">
+			<U n="byType">
+				<L n="Types">
+					<T>Humans</T>
+				</L>
+			</U>
+		</V>
+	</L>
+</I>

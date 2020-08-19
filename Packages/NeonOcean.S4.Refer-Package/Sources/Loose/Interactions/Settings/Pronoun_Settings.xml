@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<I n="NeonOcean_S4_Refer_Interactions_Settings_Pronoun_Settings" s="16675384398717032098" i="interaction" m="NeonOcean.S4.Refer.Interactions.PronounSettings" c="PronounSettingsInteraction">
+	<T n="display_name">507387595</T>
+	<T n="category">5245337334449623996<!--PieMenuCategory: NeonOcean_S4_Refer_Interaction_Categories_Refer--></T>
+	<V n="_saveable" t="disabled" />
+	<L n="basic_extras">
+		<V t="do_command">
+			<U n="do_command">
+				<L n="arguments">
+					<V t="participant">
+						<U n="participant">
+							<E n="argument">TargetSim</E>
+						</U>
+					</V>
+				</L>
+				<T n="command">neonocean.s4.refer.pronoun_settings.show_list</T>
+			</U>
+		</V>
+	</L>
+	<V n="pie_menu_icon" t="enabled">
+		<V n="enabled" t="resource_key">
+			<U n="resource_key">
+				<T n="key">00B2D882:00000000:599F4246FCBC675B</T>
+			</U>
+		</V>
+	</V>
+	<L n="ObjectRegistrationInformation">
+		<V t="byType">
+			<U n="byType">
+				<L n="Types">
+					<T>Humans</T>
+				</L>
+			</U>
+		</V>
+	</L>
+</I>

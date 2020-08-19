@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<I n="NeonOcean_S4_Refer_STBL_System_Identifiers" s="17805395165077755998" i="snippet" m="snippets" c="NeonoceanS4GlobalLanguageIdentifiers">
+	<L n="value">
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Interaction_Categories.Refer</T>
+			<T n="value">868632801</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Interactions.Settings.Mod_Settings.Display_Name</T>
+			<T n="value">1661173615</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Interactions.Settings.Pronoun_Settings.Display_Name</T>
+			<T n="value">507387595</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Interactions.Standard.About_Mod.Display_Name</T>
+			<T n="value">1265536675</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Interactions.Standard.Documentation.Display_Name</T>
+			<T n="value">2659071456</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Interactions.Standard.Reset.Display_Name</T>
+			<T n="value">45755168</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Interactions.Standard.Visit_Mod_Page.Display_Name</T>
+			<T n="value">1192666996</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Invalid_Language_Notification.Text</T>
+			<T n="value">849403623</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Invalid_Language_Notification.Title</T>
+			<T n="value">3908041120</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Pronoun_Settings.List.Paths.Root.Description</T>
+			<T n="value">1219797653</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Pronoun_Settings.List.Paths.Root.Title</T>
+			<T n="value">1674709969</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Pronoun_Settings.Values.Pronoun_Fallback.Description</T>
+			<T n="value">3602731093</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Pronoun_Settings.Values.Pronoun_Fallback.Name</T>
+			<T n="value">1902152110</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Pronoun_Settings.Values.Pronoun_Set_Selection.Description</T>
+			<T n="value">252474649</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Pronoun_Settings.Values.Pronoun_Set_Selection.Name</T>
+			<T n="value">4238594859</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Settings.Types.Pronoun_Fallback.Default</T>
+			<T n="value">59599046</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Settings.Types.Pronoun_Fallback.Dialog.Not_Selected_Row_Description</T>
+			<T n="value">3211809817</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Settings.Types.Pronoun_Fallback.Dialog.Selected_Row_Description</T>
+			<T n="value">1793447864</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Settings.Types.Pronoun_Fallback.Female</T>
+			<T n="value">3226797437</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Settings.Types.Pronoun_Fallback.Male</T>
+			<T n="value">2397868404</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Settings.Types.Pronoun_Set_Selection.Default</T>
+			<T n="value">2089269733</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Settings.Types.Pronoun_Set_Selection.Dialog.Not_Selected_Row_Description</T>
+			<T n="value">851460908</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Settings.Types.Pronoun_Set_Selection.Dialog.Selected_Row_Description</T>
+			<T n="value">2635702178</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Settings.Types.Pronoun_Set_Selection.Female</T>
+			<T n="value">3043017818</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Settings.Types.Pronoun_Set_Selection.Male</T>
+			<T n="value">1770090162</T>
+		</U>
+	</L>
+</I>

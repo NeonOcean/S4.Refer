@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<STBLXMLFile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<FallbackLanguage>0</FallbackLanguage>
+	<STBLGroup>1064960007</STBLGroup>
+	<STBLInstance>7935391776475652682</STBLInstance>
+	<STBLName>NeonOcean_S4_Refer_STBL_System_{0:Underscored}</STBLName>
+	<BuildIdentifiers>true</BuildIdentifiers>
+	<IdentifiersGroup>1064960007</IdentifiersGroup>
+	<IdentifiersInstance>17805395165077755998</IdentifiersInstance>
+	<IdentifiersName>NeonOcean_S4_Refer_STBL_System_Identifiers</IdentifiersName>
+	<Entries>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Interaction_Categories.Refer</Identifier>
+			<Key>868632801</Key>
+			<English>Refer</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Interactions.Settings.Mod_Settings.Display_Name</Identifier>
+			<Key>1661173615</Key>
+			<English>Mod Settings</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Interactions.Settings.Pronoun_Settings.Display_Name</Identifier>
+			<Key>507387595</Key>
+			<English>Pronoun Settings</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Interactions.Standard.About_Mod.Display_Name</Identifier>
+			<Key>1265536675</Key>
+			<English>About</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Interactions.Standard.Documentation.Display_Name</Identifier>
+			<Key>2659071456</Key>
+			<English>Documentation</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Interactions.Standard.Reset.Display_Name</Identifier>
+			<Key>45755168</Key>
+			<English>Reset</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Interactions.Standard.Visit_Mod_Page.Display_Name</Identifier>
+			<Key>1192666996</Key>
+			<English>Visit Mod Page</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Invalid_Language_Notification.Text</Identifier>
+			<Key>849403623</Key>
+			<English>&lt;b&gt;Warning:&lt;/b&gt; You game's language is not currently by Refer. You may not be able to select custom pronouns for your sim.</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Invalid_Language_Notification.Title</Identifier>
+			<Key>3908041120</Key>
+			<English>NeonOcean - Refer:
+Invalid Language</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Pronoun_Settings.List.Paths.Root.Description</Identifier>
+			<Key>1219797653</Key>
+			<English />
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Pronoun_Settings.List.Paths.Root.Title</Identifier>
+			<Key>1674709969</Key>
+			<English>Pronoun Settings</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Pronoun_Settings.Values.Pronoun_Fallback.Description</Identifier>
+			<Key>3602731093</Key>
+			<English>Select how we should refer to this sim in cases where this mod doesn't know how to refer to them.</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Pronoun_Settings.Values.Pronoun_Fallback.Name</Identifier>
+			<Key>1902152110</Key>
+			<English>Fallback</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Pronoun_Settings.Values.Pronoun_Set_Selection.Description</Identifier>
+			<Key>252474649</Key>
+			<English>Select the way in which this sim should be refered too.
+&lt;b&gt;Warning:&lt;/b&gt; The use of they / them pronouns can result in grammatically awkward sentences in a few cases. Check out the mod page's &lt;i&gt;issues&lt;/i&gt; section for more details.</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Pronoun_Settings.Values.Pronoun_Set_Selection.Name</Identifier>
+			<Key>4238594859</Key>
+			<English>Pronouns</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Pronoun_Fallback.Default</Identifier>
+			<Key>59599046</Key>
+			<English>Use the sim's default gendered text</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Pronoun_Fallback.Dialog.Not_Selected_Row_Description</Identifier>
+			<Key>3211809817</Key>
+			<English />
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Pronoun_Fallback.Dialog.Selected_Row_Description</Identifier>
+			<Key>1793447864</Key>
+			<English>Selected</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Pronoun_Fallback.Female</Identifier>
+			<Key>3226797437</Key>
+			<English>Use the "female" text</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Pronoun_Fallback.Male</Identifier>
+			<Key>2397868404</Key>
+			<English>Use the "male" text</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Pronoun_Set_Selection.Default</Identifier>
+			<Key>2089269733</Key>
+			<English>Default</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Pronoun_Set_Selection.Dialog.Not_Selected_Row_Description</Identifier>
+			<Key>851460908</Key>
+			<English />
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Pronoun_Set_Selection.Dialog.Selected_Row_Description</Identifier>
+			<Key>2635702178</Key>
+			<English>Selected</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Pronoun_Set_Selection.Female</Identifier>
+			<Key>3043017818</Key>
+			<English>She / Her</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Pronoun_Set_Selection.Male</Identifier>
+			<Key>1770090162</Key>
+			<English>He / Him</English>
+		</STBLXMLEntry>
+	</Entries>
+</STBLXMLFile>

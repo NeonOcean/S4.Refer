@@ -1,0 +1,31 @@
+{
+	"Namespace": "NeonOcean.S4.Refer",
+	"Name": "Refer",
+	"Author": "NeonOcean",
+	"Version": "1.0.0",
+	"Rating": "Normal",
+	"LoadController": "NeonOcean.S4.Main",
+	"Distribution": {
+		"UpdatesController": "NeonOcean",
+		"UpdatesFileURL": "http://dist.mods.neonoceancreations.com/mods/latest.json",
+		"DownloadURL": "https://www.neonoceancreations.com/mods/s4/refer",
+		"PreviewDownloadURL": "https://www.patreon.com/NeonOcean/posts?tag=Refer%20Preview"
+	},
+	"ScriptPaths": [
+		{
+			"Root": "Current",
+			"Path": "NeonOcean.S4.Refer.archive"
+		}
+	],
+	"RequiredMods": [
+		"NeonOcean.S4.Main"
+	],
+	"LoadAfter": [
+		"NeonOcean.S4.Main"
+	],
+	"Compatibility": {
+		"NeonOcean.S4.Main": {
+			"LowestVersion":  "2.1.0"
+		}
+	}
+}
