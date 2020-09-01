@@ -51,7 +51,7 @@ class PronounSetSelectionDialog(UISettings.DictionaryDialog):
 
 		currentLanguageHandler = LanguageHandlers.GetCurrentLanguageHandler()  # type: typing.Optional[typing.Type[LanguageHandlers.LanguageHandlerBase]]
 
-		def _createSelectionCallback (rowValue: str) -> typing.Callable:
+		def createSelectionCallback (rowValue: str) -> typing.Callable:
 			# noinspection PyUnusedLocal
 			def selectionCallback (dialog: ui_dialog.UiDialog) -> None:
 				self._ShowDialogInternal(setting, rowValue, showDialogArguments, returnCallback = returnCallback)
@@ -62,7 +62,7 @@ class PronounSetSelectionDialog(UISettings.DictionaryDialog):
 		defaultRowSelected = True if currentValue == defaultSelectionValue else False  # type: bool
 		defaultRow = UISettings.DialogRow(
 			10,
-			_createSelectionCallback(defaultSelectionValue),
+			createSelectionCallback(defaultSelectionValue),
 			self._GetDefaultRowText(),
 			description = self._GetSelectedRowDescription() if defaultRowSelected else self._GetNotSelectedRowDescription(),
 			icon = self._GetSelectedRowIcon() if defaultRowSelected else self._GetNotSelectedRowIcon(),
@@ -72,7 +72,7 @@ class PronounSetSelectionDialog(UISettings.DictionaryDialog):
 		femaleRowSelected = True if currentValue == femaleSelectionValue else False  # type: bool
 		femaleRow = UISettings.DialogRow(
 			11,
-			_createSelectionCallback(femaleSelectionValue),
+			createSelectionCallback(femaleSelectionValue),
 			self._GetFemaleRowText(),
 			description = self._GetSelectedRowDescription() if femaleRowSelected else self._GetNotSelectedRowDescription(),
 			icon = self._GetSelectedRowIcon() if femaleRowSelected else self._GetNotSelectedRowIcon(),
@@ -82,7 +82,7 @@ class PronounSetSelectionDialog(UISettings.DictionaryDialog):
 		maleRowSelected = True if currentValue == maleSelectionValue else False  # type: bool
 		maleRow = UISettings.DialogRow(
 			12,
-			_createSelectionCallback(maleSelectionValue),
+			createSelectionCallback(maleSelectionValue),
 			self._GetMaleRowText(),
 			description = self._GetSelectedRowDescription() if maleRowSelected else self._GetNotSelectedRowDescription(),
 			icon = self._GetSelectedRowIcon() if maleRowSelected else self._GetNotSelectedRowIcon(),
@@ -103,7 +103,7 @@ class PronounSetSelectionDialog(UISettings.DictionaryDialog):
 			pronounSetSelected = True if currentValue == pronounSetIdentifier else False  # type: bool
 			pronounSetRow = UISettings.DialogRow(
 				currentAdditionalSetOptionID,
-				_createSelectionCallback(pronounSetIdentifier),
+				createSelectionCallback(pronounSetIdentifier),
 				Language.CreateLocalizationString(pronounSetTitle),
 				description = self._GetSelectedRowDescription() if pronounSetSelected else self._GetNotSelectedRowDescription(),
 				icon = self._GetSelectedRowIcon() if pronounSetSelected else self._GetNotSelectedRowIcon(),
@@ -112,7 +112,6 @@ class PronounSetSelectionDialog(UISettings.DictionaryDialog):
 			currentAdditionalSetOptionID += 1
 
 			rows.append(pronounSetRow)
-
 
 		return rows
 

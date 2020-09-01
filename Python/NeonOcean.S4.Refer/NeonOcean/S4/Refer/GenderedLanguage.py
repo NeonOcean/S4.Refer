@@ -444,18 +444,18 @@ def _ResolveRegularTags (text: str, tokens: typing.Sequence, languageHandler: ty
 
 SingleTagPattern = re.compile("({([^\}]+)\})")
 
-SingleTagRegularPattern = re.compile("({([0-9])*\.([^\}]+)\})")
+SingleTagRegularPattern = re.compile("({([0-9])+\.([^\}]+)\})")
 
-SingleTagGenderedPattern = re.compile("({([FMU])([0-9])*\.([^\}]+)\})")
+SingleTagGenderedPattern = re.compile("({([FMU])([0-9])+\.([^\}]+)\})")
 
-GenderedTagPairPattern = re.compile("({([FMU])([0-9])*\.([^\}]+)\})"
+GenderedTagPairPattern = re.compile("({([FMU])([0-9])+\.([^\}]+)\})"
 									"\s*"
-									"({([FMU])([0-9])*\.([^\}]+)\})"
-									"(?:\s*{[FMU][0-9]*\.[^\}]+\})*")
+									"({([FMU])([0-9])+\.([^\}]+)\})"
+									"(?:\s*{[FMU][0-9]+\.[^\}]+\})*")
 
-HasTooManyGenderedTermsPattern = re.compile("{[FMU][0-9]*\.[^\}]+\}"
+HasTooManyGenderedTermsPattern = re.compile("{[FMU][0-9]+\.[^\}]+\}"
 											"\s*"
-											"{[FMU][0-9]*\.[^\}]+\}",
+											"{[FMU][0-9]+\.[^\}]+\}",
 											re.RegexFlag.IGNORECASE)  # Used to test an entry to see if the matched section has too many gendered terms in a row. This is only used if more than 2 open brackets and 2 closed brackets exist in the original match.
 
 _allLocalizationStrings = dict()  # type: typing.Dict[int, str]

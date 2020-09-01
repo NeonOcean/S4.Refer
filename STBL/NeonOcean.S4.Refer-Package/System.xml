@@ -87,6 +87,16 @@ Invalid Language</English>
 			<English>Pronouns</English>
 		</STBLXMLEntry>
 		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Dialog.New_Set_Row_Description</Identifier>
+			<Key>2271891436</Key>
+			<English>Create a new pronoun set</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Dialog.New_Set_Row_Text</Identifier>
+			<Key>1918074399</Key>
+			<English>New...</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
 			<Identifier>NeonOcean.S4.Refer.Settings.Types.Pronoun_Fallback.Default</Identifier>
 			<Key>59599046</Key>
 			<English>Use the sim's default gendered text</English>
