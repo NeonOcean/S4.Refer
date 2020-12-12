@@ -13,13 +13,8 @@ from sims import sim_info
 SettingsListRoot = "Root"  # type: str
 
 class SettingsList(UISettingsList.SettingsList):
-	TitleStandard = Language.String(This.Mod.Namespace + ".Pronoun_Settings.List.Title")  # type: Language.String
-
 	def _GetTitleText (self, listPath: str) -> localization.LocalizedString:
 		return self._GetTitleListPathText(listPath)
-
-	def _GetTitleStandardText(self) -> localization.LocalizedString:
-		return self.TitleStandard.GetLocalizationString()
 
 	def _GetTitleListPathText (self, listPath: str) -> localization.LocalizedString:
 		listPathIdentifier = listPath.replace(self.ListPathSeparator, "_")  # type: str

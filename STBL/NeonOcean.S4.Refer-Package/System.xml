@@ -17,7 +17,7 @@
 		<STBLXMLEntry>
 			<Identifier>NeonOcean.S4.Refer.Interactions.Settings.Mod_Settings.Display_Name</Identifier>
 			<Key>1661173615</Key>
-			<English>Mod Settings</English>
+			<English>Custom Pronoun Set Settings</English>
 		</STBLXMLEntry>
 		<STBLXMLEntry>
 			<Identifier>NeonOcean.S4.Refer.Interactions.Settings.Pronoun_Settings.Display_Name</Identifier>
@@ -56,6 +56,48 @@
 Invalid Language</English>
 		</STBLXMLEntry>
 		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Language_Handlers.English.Ask_To_Do_They_Are_Fix_Dialog.No_Button</Identifier>
+			<Key>546708595</Key>
+			<English>No</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Language_Handlers.English.Ask_To_Do_They_Are_Fix_Dialog.Text</Identifier>
+			<Key>1260157184</Key>
+			<English>Using "they’re" or  "they’ve" alone is not a perfect replacements for "she’s" or  "he’s". Should we apply a fix so that we use either "they’re" or "they’ve" where we know they are appropriate grammatically?
+
+&lt;b&gt;Note:&lt;/b&gt; Applying this fix will solve grammar problems, but we will have to use the sim's fallbacks in cases where we don't know whether to use "they’re" or "they’ve". This can be the case for unsupported mods or new unsupported DLC.</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Language_Handlers.English.Ask_To_Do_They_Are_Fix_Dialog.Title</Identifier>
+			<Key>3095693029</Key>
+			<English>Fix They're and They've?</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Language_Handlers.English.Ask_To_Do_They_Are_Fix_Dialog.Yes_Button</Identifier>
+			<Key>2019527784</Key>
+			<English>Yes</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Mod_Settings.List.Paths.Root.Description</Identifier>
+			<Key>1298620970</Key>
+			<English />
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Mod_Settings.List.Paths.Root.Title</Identifier>
+			<Key>3977386537</Key>
+			<English>Custom Pronoun Set Settings</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Mod_Settings.Values.Custom_Pronoun_Sets.Description</Identifier>
+			<Key>158802965</Key>
+			<English />
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Mod_Settings.Values.Custom_Pronoun_Sets.Name</Identifier>
+			<Key>1932553750</Key>
+			<English>Custom Pronoun Sets</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
 			<Identifier>NeonOcean.S4.Refer.Pronoun_Settings.List.Paths.Root.Description</Identifier>
 			<Key>1219797653</Key>
 			<English />
@@ -87,6 +129,33 @@ Invalid Language</English>
 			<English>Pronouns</English>
 		</STBLXMLEntry>
 		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Delete_Set_Confirm_Dialog.Cancel_Button</Identifier>
+			<Key>3917452398</Key>
+			<English>Cancel</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Delete_Set_Confirm_Dialog.Ok_Button</Identifier>
+			<Key>3672032133</Key>
+			<English>Yes</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Delete_Set_Confirm_Dialog.Text</Identifier>
+			<Key>1800887789</Key>
+			<English>Are you sure you want to delete this pronoun set? If yes, this pronoun set will be permanently deleted.
+
+&lt;b&gt;Deleting Set: {0.String}&lt;/b&gt;</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Delete_Set_Confirm_Dialog.Title</Identifier>
+			<Key>2035065363</Key>
+			<English>Delete This Pronoun Set?</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Dialog.Custom_Set_Row_Description</Identifier>
+			<Key>680035906</Key>
+			<English>Edit set</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
 			<Identifier>NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Dialog.New_Set_Row_Description</Identifier>
 			<Key>2271891436</Key>
 			<English>Create a new pronoun set</English>
@@ -95,6 +164,66 @@ Invalid Language</English>
 			<Identifier>NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Dialog.New_Set_Row_Text</Identifier>
 			<Key>1918074399</Key>
 			<English>New...</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Edit_Pair_Dialog.Cancel_Button</Identifier>
+			<Key>988216300</Key>
+			<English>Cancel</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Edit_Pair_Dialog.Ok_Button</Identifier>
+			<Key>1351617855</Key>
+			<English>Okay</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Edit_Pair_Dialog.Text</Identifier>
+			<Key>187191941</Key>
+			<English>What should the sim be called instead of &lt;font color="#FF0000"&gt;&lt;b&gt;{0.String}&lt;/b&gt;&lt;/font&gt; or &lt;font color="#FF0000"&gt;&lt;b&gt;{1.String}&lt;/b&gt;&lt;/font&gt;</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Edit_Pair_Dialog.Title</Identifier>
+			<Key>265568469</Key>
+			<English>Input Appropriate Alternative</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Edit_Pronoun_Set_Dialog.Delete_Set_Row.Description</Identifier>
+			<Key>3001410160</Key>
+			<English>Permanently delete this custom pronoun set.</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Edit_Pronoun_Set_Dialog.Delete_Set_Row.Text</Identifier>
+			<Key>3595768963</Key>
+			<English>Delete This Set</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Edit_Pronoun_Set_Dialog.Edit_Title_Row.Text</Identifier>
+			<Key>3543612137</Key>
+			<English>Edit Set Title</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Edit_Pronoun_Set_Dialog.Editable_Pair_Row.Special_Alternative</Identifier>
+			<Key>487973270</Key>
+			<English>- Special Alternative -</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Edit_Title_Dialog.Cancel_Button</Identifier>
+			<Key>3253588156</Key>
+			<English>Cancel</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Edit_Title_Dialog.Ok_Button</Identifier>
+			<Key>3525935508</Key>
+			<English>Okay</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Edit_Title_Dialog.Text</Identifier>
+			<Key>3182203901</Key>
+			<English>What should this custom pronoun set be called?</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Edit_Title_Dialog.Title</Identifier>
+			<Key>4058302676</Key>
+			<English>Input Pronoun Set Title</English>
 		</STBLXMLEntry>
 		<STBLXMLEntry>
 			<Identifier>NeonOcean.S4.Refer.Settings.Types.Pronoun_Fallback.Default</Identifier>
@@ -145,6 +274,44 @@ Invalid Language</English>
 			<Identifier>NeonOcean.S4.Refer.Settings.Types.Pronoun_Set_Selection.Male</Identifier>
 			<Key>1770090162</Key>
 			<English>He / Him</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Warnings.Game_STBL_Package_Missing.Text</Identifier>
+			<Key>337712953</Key>
+			<English>We could not find one or more of the game's localization package files. This problem will prevent Refer from changing your sim's pronouns. 
+
+Please report this issue to the mod's creator by email.
+
+NeonOceanCreations@gmail.com</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Warnings.Game_STBL_Package_Missing.Title</Identifier>
+			<Key>3270908290</Key>
+			<English>NeonOcean - Refer: Could Not Find Language Data</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Warnings.Game_STBL_Package_Read_Error.Text</Identifier>
+			<Key>475079788</Key>
+			<English>We could not read one or more of the game's localization package files. This problem will prevent Refer from changing your sim's pronouns. 
+
+Please report this issue to the mod's creator by email.
+
+NeonOceanCreations@gmail.com</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Warnings.Game_STBL_Package_Read_Error.Title</Identifier>
+			<Key>3032741218</Key>
+			<English>NeonOcean - Refer: Error Reading Language Data</English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Warnings.Unsupported_Language.Text</Identifier>
+			<Key>3208828386</Key>
+			<English>Refer does not currently support the language your game is set to. </English>
+		</STBLXMLEntry>
+		<STBLXMLEntry>
+			<Identifier>NeonOcean.S4.Refer.Warnings.Unsupported_Language.Title</Identifier>
+			<Key>787370773</Key>
+			<English>NeonOcean - Refer: Unsupported Language</English>
 		</STBLXMLEntry>
 	</Entries>
 </STBLXMLFile>

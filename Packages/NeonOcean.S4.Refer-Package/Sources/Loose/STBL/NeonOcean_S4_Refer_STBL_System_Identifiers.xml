@@ -38,6 +38,38 @@
 			<T n="value">3908041120</T>
 		</U>
 		<U>
+			<T n="key">NeonOcean.S4.Refer.Language_Handlers.English.Ask_To_Do_They_Are_Fix_Dialog.No_Button</T>
+			<T n="value">546708595</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Language_Handlers.English.Ask_To_Do_They_Are_Fix_Dialog.Text</T>
+			<T n="value">1260157184</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Language_Handlers.English.Ask_To_Do_They_Are_Fix_Dialog.Title</T>
+			<T n="value">3095693029</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Language_Handlers.English.Ask_To_Do_They_Are_Fix_Dialog.Yes_Button</T>
+			<T n="value">2019527784</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Mod_Settings.List.Paths.Root.Description</T>
+			<T n="value">1298620970</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Mod_Settings.List.Paths.Root.Title</T>
+			<T n="value">3977386537</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Mod_Settings.Values.Custom_Pronoun_Sets.Description</T>
+			<T n="value">158802965</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Mod_Settings.Values.Custom_Pronoun_Sets.Name</T>
+			<T n="value">1932553750</T>
+		</U>
+		<U>
 			<T n="key">NeonOcean.S4.Refer.Pronoun_Settings.List.Paths.Root.Description</T>
 			<T n="value">1219797653</T>
 		</U>
@@ -62,12 +94,80 @@
 			<T n="value">4238594859</T>
 		</U>
 		<U>
+			<T n="key">NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Delete_Set_Confirm_Dialog.Cancel_Button</T>
+			<T n="value">3917452398</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Delete_Set_Confirm_Dialog.Ok_Button</T>
+			<T n="value">3672032133</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Delete_Set_Confirm_Dialog.Text</T>
+			<T n="value">1800887789</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Delete_Set_Confirm_Dialog.Title</T>
+			<T n="value">2035065363</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Dialog.Custom_Set_Row_Description</T>
+			<T n="value">680035906</T>
+		</U>
+		<U>
 			<T n="key">NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Dialog.New_Set_Row_Description</T>
 			<T n="value">2271891436</T>
 		</U>
 		<U>
 			<T n="key">NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Dialog.New_Set_Row_Text</T>
 			<T n="value">1918074399</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Edit_Pair_Dialog.Cancel_Button</T>
+			<T n="value">988216300</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Edit_Pair_Dialog.Ok_Button</T>
+			<T n="value">1351617855</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Edit_Pair_Dialog.Text</T>
+			<T n="value">187191941</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Edit_Pair_Dialog.Title</T>
+			<T n="value">265568469</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Edit_Pronoun_Set_Dialog.Delete_Set_Row.Description</T>
+			<T n="value">3001410160</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Edit_Pronoun_Set_Dialog.Delete_Set_Row.Text</T>
+			<T n="value">3595768963</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Edit_Pronoun_Set_Dialog.Edit_Title_Row.Text</T>
+			<T n="value">3543612137</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Edit_Pronoun_Set_Dialog.Editable_Pair_Row.Special_Alternative</T>
+			<T n="value">487973270</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Edit_Title_Dialog.Cancel_Button</T>
+			<T n="value">3253588156</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Edit_Title_Dialog.Ok_Button</T>
+			<T n="value">3525935508</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Edit_Title_Dialog.Text</T>
+			<T n="value">3182203901</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Settings.Types.Custom_Pronoun_Sets.Edit_Title_Dialog.Title</T>
+			<T n="value">4058302676</T>
 		</U>
 		<U>
 			<T n="key">NeonOcean.S4.Refer.Settings.Types.Pronoun_Fallback.Default</T>
@@ -108,6 +208,30 @@
 		<U>
 			<T n="key">NeonOcean.S4.Refer.Settings.Types.Pronoun_Set_Selection.Male</T>
 			<T n="value">1770090162</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Warnings.Game_STBL_Package_Missing.Text</T>
+			<T n="value">337712953</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Warnings.Game_STBL_Package_Missing.Title</T>
+			<T n="value">3270908290</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Warnings.Game_STBL_Package_Read_Error.Text</T>
+			<T n="value">475079788</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Warnings.Game_STBL_Package_Read_Error.Title</T>
+			<T n="value">3032741218</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Warnings.Unsupported_Language.Text</T>
+			<T n="value">3208828386</T>
+		</U>
+		<U>
+			<T n="key">NeonOcean.S4.Refer.Warnings.Unsupported_Language.Title</T>
+			<T n="value">787370773</T>
 		</U>
 	</L>
 </I>

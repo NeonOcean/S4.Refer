@@ -2,9 +2,9 @@ from __future__ import annotations
 
 import typing
 
-from NeonOcean.S4.Main import Language, This
+from NeonOcean.S4.Main import Language
 from NeonOcean.S4.Main.UI import SettingsList as UISettingsList, SettingsShared as UISettingsShared
-from NeonOcean.S4.Refer import Settings
+from NeonOcean.S4.Refer import Settings, This
 from NeonOcean.S4.Refer.Settings import Base as SettingsBase
 from sims4 import localization
 
@@ -12,7 +12,7 @@ SettingsListRoot = "Root"  # type: str
 
 class SettingsList(UISettingsList.SettingsList):
 	def _GetTitleText (self, listPath: str) -> localization.LocalizedString:
-		return Language.GetLocalizationStringByIdentifier(This.Mod.Namespace + ".Mod_Settings.List.Title")
+		return self._GetTitleListPathText(listPath)
 
 	def _GetTitleListPathText (self, listPath: str) -> localization.LocalizedString:
 		listPathIdentifier = listPath.replace(self.ListPathSeparator, "_")  # type: str

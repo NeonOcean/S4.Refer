@@ -138,6 +138,22 @@ class LanguageHandlerBase:
 		raise NotImplementedError()
 
 	@classmethod
+	def GetCustomPronounSetEditableGenderTagPairs (cls) -> typing.List[str]:
+		"""
+		Get a list of gender tag pairs that are editable when creating a custom pronoun set.
+		"""
+
+		raise NotImplementedError()
+
+	@classmethod
+	def GetCustomPronounSetStandardValues (cls) -> typing.Dict[str, str]:
+		"""
+		Get the standard values that custom pronoun sets should have.
+		"""
+
+		raise NotImplementedError()
+
+	@classmethod
 	def GetMoneyString (cls, moneyAmount: numbers.Number) -> str:
 		"""
 		Add the simoleon symbol to this money amount. This should return something like "§52".
@@ -152,6 +168,19 @@ class LanguageHandlerBase:
 		"""
 
 		raise NotImplementedError()
+
+	"""
+
+
+	"""
+	@classmethod
+	def AskToApplyAndFixCustomPronounSetPair (cls, modifyingSet: dict, modifyingPairIdentifier: str, chosenPairValue: str, callback: typing.Callable) -> None:
+		"""
+		Show a dialog asking to do an appropriate fix to a custom pronoun set's pair value. If the user allows the fix, this function should also apply the
+		fix by modifying the 'modifyingSet' parameter. The callback parameter should be always called regardless of what the player chooses.
+		"""
+
+		pass
 
 class _Announcer(Director.Announcer):
 	_onLoadingScreenAnimationFinished = False

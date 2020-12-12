@@ -27,3 +27,4 @@ class CustomPronounSetsSetting(SettingsBase.Setting):
 
 class CustomPronounSetsDialogSetting(CustomPronounSetsSetting):
 	Dialog = SettingsDialogs.CustomPronounSetsDialog
+	EditPronounSetDialog = SettingsDialogs.EditPronounSetDialog

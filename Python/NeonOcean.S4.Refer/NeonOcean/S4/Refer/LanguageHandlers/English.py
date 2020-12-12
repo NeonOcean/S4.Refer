@@ -6,10 +6,12 @@ import typing
 
 import game_services
 import paths
-from NeonOcean.S4.Main import Debug
+from NeonOcean.S4.Main import Debug, Language
 from NeonOcean.S4.Main.Tools import Exceptions, Version
+from NeonOcean.S4.Main.UI import Dialogs as UIDialogs
 from NeonOcean.S4.Refer import GenderedLanguage, LanguageHandlers, This
 from sims4 import common as Sims4Common
+from ui import ui_dialog
 
 class EnglishLanguageHandler(LanguageHandlers.LanguageHandlerBase):
 	IsLanguageHandler = True  # type: bool
@@ -40,6 +42,11 @@ class EnglishLanguageHandler(LanguageHandlers.LanguageHandlerBase):
 
 	GameLocalizationPackageFileName = "Strings_ENG_US.package"  # type: str
 
+	AskToDoTheyAreFixDialogTitle = Language.String(This.Mod.Namespace + ".Language_Handlers.English.Ask_To_Do_They_Are_Fix_Dialog.Title", fallbackText = "Ask_To_Do_They_Are_Fix_Dialog.Title")
+	AskToDoTheyAreFixDialogText = Language.String(This.Mod.Namespace + ".Language_Handlers.English.Ask_To_Do_They_Are_Fix_Dialog.Text", fallbackText = "Ask_To_Do_They_Are_Fix_Dialog.Text")
+	AskToDoTheyAreFixDialogYesButton = Language.String(This.Mod.Namespace + ".Language_Handlers.English.Ask_To_Do_They_Are_Fix_Dialog.Yes_Button", fallbackText = "Ask_To_Do_They_Are_Fix_Dialog.Yes_Button")
+	AskToDoTheyAreFixDialogNoButton = Language.String(This.Mod.Namespace + ".Language_Handlers.English.Ask_To_Do_They_Are_Fix_Dialog.No_Button", fallbackText = "Ask_To_Do_They_Are_Fix_Dialog.No_Button")
+	
 	@classmethod
 	def GetHandlerVersion (cls) -> Version.Version:
 		return This.Mod.Version
@@ -155,7 +162,7 @@ class EnglishLanguageHandler(LanguageHandlers.LanguageHandlerBase):
 			return [baseGameLocalizationPackageFilePath]
 
 		else:
-			packLocalizationPackageFilePath = os.path.join(gameRootPath, pack.name.upper(), cls.GameLocalizationPackageFileName)  # type: str
+			packLocalizationPackageFilePath = os.path.join(gameRootPath, pack.name.upper(), cls.GameLocalizationPackageFileName)  # type: str # TODO revert
 
 			if not os.path.exists(packLocalizationPackageFilePath):
 				Debug.Log("Could not find a pack's localization package file.\nPack: %s\nExpected Location: %s" % (pack.name, packLocalizationPackageFilePath), This.Mod.Namespace, Debug.LogLevels.Warning, group = This.Mod.Namespace, owner = __name__)
@@ -164,15 +171,73 @@ class EnglishLanguageHandler(LanguageHandlers.LanguageHandlerBase):
 			return [packLocalizationPackageFilePath]
 
 	@classmethod
+	def GetCustomPronounSetEditableGenderTagPairs (cls) -> typing.List[str]:
+		"""
+		Get a list of gender tag pairs that are editable when creating a custom pronoun set.
+		"""
+
+		return [
+			"she|he",
+			"her|him",
+			"her|his",
+			"hers|his",
+			"she’s|he’s",
+			"she’ll|he’ll",
+			"she’d|he’d",
+			"herself|himself"
+		]
+
+	@classmethod
+	def GetCustomPronounSetStandardValues (cls) -> typing.Dict[str, str]:
+		"""
+		Get the standard values that custom pronoun sets should have.
+		"""
+
+		return {
+			"ms.|mr.": "mx.",
+			"girlfriend|boyfriend": "partner",
+			"sister|brother": "sibling",
+			"mother|father": "parent",
+			"grandmother|grandfather": "grandparent",
+			"granddaughter|grandson": "grandchild",
+			"wife|husband": "partner",
+			"daughter|son": "child",
+			"step-daughter|step-son": "step-child",
+			"step-mother|step-father": "step-parent",
+			"stepsister|stepbrother": "step-sibling",
+			"great-granddaughter|great-grandson": "great-grandchild",
+			"great-grandmother|great-grandfather": "great-grandparent",
+			"half-sister|half-brother": "half-sibling",
+		}
+
+	@classmethod
 	def GetMoneyString (cls, moneyAmount: numbers.Number) -> str:
 		return "§%s" % str(moneyAmount)
 
 	@classmethod
-	def GetSimFullNameString(cls, simFirstName: str, simLastName: str) -> str:
+	def GetSimFullNameString (cls, simFirstName: str, simLastName: str) -> str:
 		if not simLastName.isspace():
 			return "%s %s" % (simFirstName, simLastName)
 		else:
 			return simFirstName
+
+	@classmethod
+	def AskToApplyAndFixCustomPronounSetPair(cls, modifyingSet: dict, modifyingPairIdentifier: str, chosenPairValue: str, callback: typing.Callable) -> None:
+		if modifyingPairIdentifier == "she’s|he’s":
+			chosenPairValueLower = chosenPairValue.lower().replace("'", "’")
+
+			if chosenPairValueLower == "they’re" or chosenPairValueLower == "they’ve":
+				def createFixPronounIsContractionCallback () -> typing.Callable[[bool], None]:
+
+					def fixPronounIsContractionCallback (doFix: bool) -> None:
+						if doFix:
+							modifyingSet[modifyingPairIdentifier] = cls._GetTheyThemSetPronounIsContraction()
+
+						callback()
+
+					return fixPronounIsContractionCallback
+
+				cls._AskToDoTheyThemFix(createFixPronounIsContractionCallback())
 
 	@classmethod
 	def _CreateTheyThemSet (cls) -> dict:
@@ -222,12 +287,12 @@ class EnglishLanguageHandler(LanguageHandlers.LanguageHandlerBase):
 				2288915427: ["they’re"],
 				3169408581: ["they’re"],
 				2678019203: ["they’ve"],
-				3330177454: [ "they’ve", "they’ve" ],
+				3330177454: ["they’ve", "they’ve"],
 				1827704107: ["they’re"],
 				2578737338: ["they’ve"],
 				3492028680: ["they’re"],
 				1333238331: ["they’ve"],
-				515967586: ["they’ve", "they’ve" ],
+				515967586: ["they’ve", "they’ve"],
 				3561336254: ["they’re"],
 				3704738005: ["they’re"],
 				465738403: ["they’re"],
@@ -429,6 +494,27 @@ class EnglishLanguageHandler(LanguageHandlers.LanguageHandlerBase):
 				1421972396: ["they’re"],
 				2321907389: ["they’re"],
 
+				# EP10
+				1026766317: ["they’ve"],
+				4141109267: ["they’re"],
+				829066520: ["they’re"],
+				1655784957: ["they’ve"],
+				4124333197: ["they’re"],
+				4167129096: ["they’re"],
+				1621259442: ["they’re"],
+				2657358867: ["they’re"],
+				1677419905: ["they’re", "they’ve"],
+				1633334723: ["they’re"],
+				1597935695: ["they’re"],
+				2078949162: ["they’re"],
+				3052483502: ["they’re"],
+				581190033: ["they’re", "they’re", "they’re"],
+				1190606639: ["they’re"],
+				4124192543: ["they’re"],
+				2129713926: ["they’re"],
+				774846671: ["they’re"],
+				1030449092: ["they’re"],
+
 				# GP06
 				106949386: ["they’re"],
 				1145245963: ["they’ve"],
@@ -622,3 +708,20 @@ class EnglishLanguageHandler(LanguageHandlers.LanguageHandlerBase):
 		}
 
 		return creatingSet
+
+	@classmethod
+	def _AskToDoTheyThemFix (cls, callback: typing.Callable[[bool], None]) -> None:
+		def createDialogCallback () -> typing.Callable:
+			def dialogCallback (shownDialog: ui_dialog.UiDialogOkCancel) -> None:
+				callback(shownDialog.accepted)
+
+			return dialogCallback
+
+		dialogArguments = {
+			"title": cls.AskToDoTheyAreFixDialogTitle.GetCallableLocalizationString(),
+			"text": cls.AskToDoTheyAreFixDialogText.GetCallableLocalizationString(),
+			"text_ok": cls.AskToDoTheyAreFixDialogYesButton.GetCallableLocalizationString(),
+			"text_cancel": cls.AskToDoTheyAreFixDialogNoButton.GetCallableLocalizationString()
+		}  # type: typing.Dict[str, ...]
+
+		UIDialogs.ShowOkCancelDialog(callback = createDialogCallback(), queue = False, **dialogArguments)

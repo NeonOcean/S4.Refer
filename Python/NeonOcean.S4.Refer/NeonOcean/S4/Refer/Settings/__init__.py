@@ -3,9 +3,14 @@ from __future__ import annotations
 import types
 import typing
 
-from NeonOcean.S4.Refer.Settings import Base as SettingsBase, Dialogs as SettingsDialogs, Types as SettingsTypes
-from NeonOcean.S4.Refer.Settings.CustomPronounSets import CustomPronounSets
 from NeonOcean.S4.Main.Tools import Events
+from NeonOcean.S4.Refer.Settings import Base as SettingsBase, Dialogs as SettingsDialogs, Types as SettingsTypes
+
+class CustomPronounSets(SettingsTypes.CustomPronounSetsDialogSetting):
+	IsSetting = True  # type: bool
+
+	Key = "Custom_Pronoun_Sets"  # type: str
+	Default = dict()  # type: dict
 
 def GetSettingsFilePath () -> str:
 	return SettingsBase.SettingsFilePath

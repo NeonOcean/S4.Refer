@@ -270,7 +270,10 @@ def _CorrectGenderedTagPairs (textKey: int, text: str, tokens: typing.Sequence, 
 						elif isinstance(tagTokenSetPairValue, int):
 							addGenderText(tagTokenSetPairValue)
 						elif isinstance(tagTokenSetPairValue, str):
-							addSpecificText(tagTokenSetPairValue)
+							if tagTokenSetPairValue == "" or tagTokenSetPairValue.isspace():
+								addGenderText(tagTokenFallback)
+							else:
+								addSpecificText(tagTokenSetPairValue)
 						elif isinstance(tagTokenSetPairValue, dict):
 							tagTokenSetCasesDefault = tagTokenSetPairValue.get("Default", None)  # type: typing.Optional[str]
 							tagTokenSetCases = tagTokenSetPairValue["Cases"]  # type: dict

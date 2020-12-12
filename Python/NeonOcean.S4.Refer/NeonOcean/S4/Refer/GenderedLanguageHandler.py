@@ -5,13 +5,85 @@ import os
 import time
 import typing
 
-from NeonOcean.S4.Main import Debug, Director
+from NeonOcean.S4.Main import Debug, Director, Language, Paths, LoadingShared, Reporting
 from NeonOcean.S4.Main.Tools import Exceptions, Patcher, Python, Timer, Version
+from NeonOcean.S4.Main.UI import Notifications
 from NeonOcean.S4.Refer import GenderedLanguage, LanguageHandlers, This
 from NeonOcean.S4.Refer.Tools import Package, STBL
 from protocolbuffers import Localization_pb2
 from server import client
+import paths as Sims4Paths
 from sims4 import common as Sims4Common, localization, resources
+from ui import ui_dialog_notification
+
+UnsupportedLanguageNotificationTitle = Language.String(This.Mod.Namespace + ".Warnings.Unsupported_Language.Title")  # type: Language.String
+UnsupportedLanguageNotificationText = Language.String(This.Mod.Namespace + ".Warnings.Unsupported_Language.Text")  # type: Language.String
+
+GameSTBLPackageMissingNotificationTitle = Language.String(This.Mod.Namespace + ".Warnings.Game_STBL_Package_Missing.Title")  # type: Language.String
+GameSTBLPackageMissingNotificationText = Language.String(This.Mod.Namespace + ".Warnings.Game_STBL_Package_Missing.Text")  # type: Language.String
+
+GameSTBLPackageReadErrorNotificationTitle = Language.String(This.Mod.Namespace + ".Warnings.Game_STBL_Package_Read_Error.Title")  # type: Language.String
+GameSTBLPackageReadErrorNotificationText = Language.String(This.Mod.Namespace + ".Warnings.Game_STBL_Package_Read_Error.Text")  # type: Language.String
+
+PacksWithExpectedLanguageData = [
+	Sims4Common.Pack.BASE_GAME,
+
+	# Expansion packs
+	Sims4Common.Pack.EP01,
+	Sims4Common.Pack.EP02,
+	Sims4Common.Pack.EP03,
+	Sims4Common.Pack.EP04,
+	Sims4Common.Pack.EP05,
+	Sims4Common.Pack.EP06,
+	Sims4Common.Pack.EP07,
+	Sims4Common.Pack.EP08,
+	Sims4Common.Pack.EP09,
+	Sims4Common.Pack.EP10,
+
+	#Game Packs
+	Sims4Common.Pack.GP01,
+	Sims4Common.Pack.GP02,
+	Sims4Common.Pack.GP03,
+	Sims4Common.Pack.GP04,
+	Sims4Common.Pack.GP05,
+	Sims4Common.Pack.GP06,
+	Sims4Common.Pack.GP07,
+	Sims4Common.Pack.GP08,
+	Sims4Common.Pack.GP09,
+	Sims4Common.Pack.GP10,
+
+	#Stuff Packs
+	Sims4Common.Pack.SP01,
+	Sims4Common.Pack.SP02,
+	Sims4Common.Pack.SP03,
+	Sims4Common.Pack.SP04,
+	Sims4Common.Pack.SP05,
+	Sims4Common.Pack.SP06,
+	Sims4Common.Pack.SP07,
+	Sims4Common.Pack.SP08,
+	Sims4Common.Pack.SP09,
+	Sims4Common.Pack.SP10,
+	Sims4Common.Pack.SP11,
+	Sims4Common.Pack.SP12,
+	Sims4Common.Pack.SP13,
+	Sims4Common.Pack.SP15,
+	Sims4Common.Pack.SP16,
+	Sims4Common.Pack.SP17,
+	Sims4Common.Pack.SP18,
+	Sims4Common.Pack.SP19,
+	Sims4Common.Pack.SP20,
+
+]
+
+LanguageCacheDirectoryPath = os.path.join(This.Mod.PersistentPath, "Language Cache")  # type: str
+GameLanguageCacheDirectoryPath = os.path.join(LanguageCacheDirectoryPath, "Game")  # type: str
+
+GenderedLanguageCacheDirectoryPath = os.path.join(This.Mod.PersistentPath, "Gendered Language Cache")  # type: str
+GameGenderedLanguageCacheDirectoryPath = os.path.join(GenderedLanguageCacheDirectoryPath, "Game")  # type: str
+
+GameFileStructureFileName = "Game File Structure.txt"  # type: str
+GameFileStructureFilePath = os.path.join(Paths.UserDataPath, GameFileStructureFileName)  # type: str
+# The path used to log the game program file structure, this file is created for debugging purposes and only appears when we couldn't find a language package file.
 
 class _LanguageCacheInfo:
 	_cachedHandlerLanguageSavingKey = "CachedHandlerLanguage"  # type: str
@@ -61,8 +133,14 @@ class _Announcer(Director.Announcer):
 	def OnClientConnect (cls, clientReference: client.Client) -> None:
 		if not cls._onClientConnectTriggered:
 			searchStartTime = time.time()  # type: float
-			# noinspection PyProtectedMember
-			_AddLocalizationStringsToDictionaries(GenderedLanguage._allLocalizationStrings, GenderedLanguage._genderedLocalizationStrings)
+
+			try:
+				# noinspection PyProtectedMember
+				_AddLocalizationStringsToDictionaries(GenderedLanguage._allLocalizationStrings, GenderedLanguage._genderedLocalizationStrings)
+			except:
+				_ShowGameSTBLPackageReadErrorNotification()
+				raise
+
 			searchTime = time.time() - searchStartTime  # type: float
 
 			# noinspection PyProtectedMember
@@ -78,12 +156,19 @@ class _Announcer(Director.Announcer):
 def _Setup () -> None:
 	_DoPatches()
 
-def _AddLocalizationStringsToDictionaries (allLocalizationStrings: typing.Dict[int, str], genderedLocalizationStrings: typing.Dict[int, str]) -> None:
-	# TODO notify player of issues
+# noinspection PyUnusedLocal
+def _OnStart (cause: LoadingShared.LoadingCauses) -> None:
+	Reporting.RegisterReportFileCollector(_GameFileStructureCollector)
 
+# noinspection PyUnusedLocal
+def _OnStop (cause: LoadingShared.UnloadingCauses) -> None:
+	Reporting.UnregisterReportFileCollector(_GameFileStructureCollector)
+
+def _AddLocalizationStringsToDictionaries (allLocalizationStrings: typing.Dict[int, str], genderedLocalizationStrings: typing.Dict[int, str]) -> None:
 	currentLanguageHandler = LanguageHandlers.GetCurrentLanguageHandler()  # type: typing.Optional[LanguageHandlers.LanguageHandlerBase]
 
 	if currentLanguageHandler is None:
+		_ShowUnsupportedLanguageNotification()
 		return
 
 	def filterAndFixText (handlingLocalizationStrings: typing.Dict[int, str]) -> typing.Dict[int, str]:
@@ -100,8 +185,13 @@ def _AddLocalizationStringsToDictionaries (allLocalizationStrings: typing.Dict[i
 
 		return filteredAndFixedLocalizationStrings
 
+	missingPackLanguageData = False  # type: bool
+
 	for targetPack in Sims4Common.get_available_packs():  # type: Sims4Common.Pack
 		targetPackageFilePaths = currentLanguageHandler.GetPackLocalizationPackageFilePaths(targetPack)  # type: typing.List[str]
+
+		if len(targetPackageFilePaths) == 0 and targetPack in PacksWithExpectedLanguageData:
+			missingPackLanguageData = True
 
 		for targetPackageFilePath in targetPackageFilePaths:  # type: str
 			try:
@@ -196,6 +286,10 @@ def _AddLocalizationStringsToDictionaries (allLocalizationStrings: typing.Dict[i
 			except:
 				Debug.Log("Failed to read the localization strings of a package file at '%s'." % targetPackageFilePath, This.Mod.Namespace, Debug.LogLevels.Exception, group = This.Mod.Namespace, owner = __name__)
 
+	if missingPackLanguageData:
+		_ShowGameSTBLPackageMissingNotification()
+		_LogGameFileStructure()
+
 	# noinspection PyTypeChecker
 	modSTBLFileKeys = resources.get_all_resources_of_type(570775514)  # type: typing.Tuple[typing.Any, ...]
 
@@ -253,10 +347,10 @@ def _GetGamePackLanguageCacheInfo (pack: Sims4Common.Pack, packageEntry: Package
 	return _LanguageCacheInfo.FromDictionary(cacheInfoDictionary)
 
 def _GetGamePackLanguageCacheFilePath (pack: Sims4Common.Pack, packageEntry: Package.PackageEntry) -> str:
-	return os.path.join(_gameLanguageCacheFolderPath, pack.name, packageEntry.IdentifiersToString().replace(":", "-")) + ".json"
+	return os.path.join(GameLanguageCacheDirectoryPath, pack.name, packageEntry.IdentifiersToString().replace(":", "-")) + ".json"
 
 def _GetGamePackLanguageCacheInfoFilePath (pack: Sims4Common.Pack, packageEntry: Package.PackageEntry) -> str:
-	return os.path.join(_gameLanguageCacheFolderPath, pack.name, packageEntry.IdentifiersToString().replace(":", "-")) + "-info.json"
+	return os.path.join(GameLanguageCacheDirectoryPath, pack.name, packageEntry.IdentifiersToString().replace(":", "-")) + "-info.json"
 
 def _WriteGamePackGenderedLanguageCache (pack: Sims4Common.Pack, packageEntry: Package.PackageEntry, genderedLocalizationStrings: typing.Dict[int, str], cacheInfo: _LanguageCacheInfo) -> None:
 	cacheFilePath = _GetGamePackGenderedLanguageCacheFilePath(pack, packageEntry)  # type: str
@@ -299,10 +393,93 @@ def _GetGamePackGenderedLanguageCacheInfo (pack: Sims4Common.Pack, packageEntry:
 	return _LanguageCacheInfo.FromDictionary(cacheInfoDictionary)
 
 def _GetGamePackGenderedLanguageCacheFilePath (pack: Sims4Common.Pack, packageEntry: Package.PackageEntry) -> str:
-	return os.path.join(_gameGenderedLanguageCacheFolderPath, pack.name, packageEntry.IdentifiersToString().replace(":", "-")) + ".json"
+	return os.path.join(GameGenderedLanguageCacheDirectoryPath, pack.name, packageEntry.IdentifiersToString().replace(":", "-")) + ".json"
 
 def _GetGamePackGenderedLanguageCacheInfoFilePath (pack: Sims4Common.Pack, packageEntry: Package.PackageEntry) -> str:
-	return os.path.join(_gameGenderedLanguageCacheFolderPath, pack.name, packageEntry.IdentifiersToString().replace(":", "-")) + "-info.json"
+	return os.path.join(GameGenderedLanguageCacheDirectoryPath, pack.name, packageEntry.IdentifiersToString().replace(":", "-")) + "-info.json"
+
+def _LogGameFileStructure () -> None:
+	try:
+		gameFileStructure = _GetGameFileStructure()  # type: str
+
+		with open(GameFileStructureFilePath, "w+") as gameFileStructureLogFile:
+			gameFileStructureLogFile.write(gameFileStructure)
+	except:
+		Debug.Log("Failed to log the game's file structure to the file at '%s'." % GameFileStructureFilePath, This.Mod.Namespace, Debug.LogLevels.Error, group = This.Mod.Namespace, owner = __name__)
+	else:
+		Debug.Log("Successfully logged the game's file structure to the file at '%s'." % GameFileStructureFilePath, This.Mod.Namespace, Debug.LogLevels.Info, group = This.Mod.Namespace, owner = __name__)
+
+def _GameFileStructureCollector () -> typing.List[str]:
+	if os.path.exists(GameFileStructureFilePath):
+		return [ GameFileStructureFilePath ]
+	else:
+		return list()
+
+def _GetGameFileStructure () -> str:
+	gameRootPath = os.path.dirname(os.path.dirname(  # "C:\Program Files (x86)\Origin Games\The Sims 4\Game\Bin" > "C:\Program Files (x86)\Origin Games\The Sims 4"
+		os.path.normpath(os.path.abspath(Sims4Paths.APP_ROOT))  # "C:\Program Files (x86)\Origin Games\The Sims 4\Game\Bin\" > "C:\Program Files (x86)\Origin Games\The Sims 4\Game\Bin" - This is something that is done to this path in the paths module.
+	))  # type: str
+
+	try:
+		gameFileStructure = os.path.split(gameRootPath)[1] + " {" + os.path.split(gameRootPath)[1] + "}"  # type: str
+
+		for directoryRoot, directoryNames, fileNames in os.walk(gameRootPath):  # type: str, list, list
+			depth = 1
+
+			if directoryRoot != gameRootPath:
+				depth = len(directoryRoot.replace(gameRootPath + os.path.sep, "").split(os.path.sep)) + 1  # type: int
+
+			indention = "\t" * depth  # type: str
+
+			newString = ""  # type: str
+
+			for directory in directoryNames:
+				newString += "\n" + indention + directory + " {" + directory + "}"
+
+			for file in fileNames:
+				newString += "\n" + indention + file + " (" + str(os.path.getsize(os.path.join(directoryRoot, file))) + " B)"
+
+			if len(newString) == 0:
+				newString = "\n"
+
+			newString += "\n"
+
+			gameFileStructure = gameFileStructure.replace("{" + os.path.split(directoryRoot)[1] + "}", "{" + newString + "\t" * (depth - 1) + "}", 1)
+
+		return gameFileStructure
+	except Exception as e:
+		return "Failed to get mod information\n" + Debug.DebugShared.FormatException(e)
+
+def _ShowUnsupportedLanguageNotification () -> None:
+	notificationArguments = {
+		"title": UnsupportedLanguageNotificationTitle.GetCallableLocalizationString(),
+		"text": UnsupportedLanguageNotificationText.GetCallableLocalizationString(),
+		"expand_behavior": ui_dialog_notification.UiDialogNotification.UiDialogNotificationExpandBehavior.FORCE_EXPAND,
+		"urgency": ui_dialog_notification.UiDialogNotification.UiDialogNotificationUrgency.URGENT
+	}  # type: typing.Dict[str, ...]
+
+	Notifications.ShowNotification(queue = True, **notificationArguments)
+
+def _ShowGameSTBLPackageMissingNotification () -> None:
+	notificationArguments = {
+		"title": GameSTBLPackageMissingNotificationTitle.GetCallableLocalizationString(),
+		"text": GameSTBLPackageMissingNotificationText.GetCallableLocalizationString(),
+		"expand_behavior": ui_dialog_notification.UiDialogNotification.UiDialogNotificationExpandBehavior.FORCE_EXPAND,
+		"urgency": ui_dialog_notification.UiDialogNotification.UiDialogNotificationUrgency.URGENT
+	}  # type: typing.Dict[str, ...]
+
+	Notifications.ShowNotification(queue = True, **notificationArguments)
+
+
+def _ShowGameSTBLPackageReadErrorNotification () -> None:
+	notificationArguments = {
+		"title": GameSTBLPackageReadErrorNotificationTitle.GetCallableLocalizationString(),
+		"text": GameSTBLPackageMissingNotificationText.GetCallableLocalizationString(),
+		"expand_behavior": ui_dialog_notification.UiDialogNotification.UiDialogNotificationExpandBehavior.FORCE_EXPAND,
+		"urgency": ui_dialog_notification.UiDialogNotification.UiDialogNotificationUrgency.URGENT
+	}  # type: typing.Dict[str, ...]
+
+	Notifications.ShowNotification(queue = True, **notificationArguments)
 
 def _DoPatches () -> None:
 	_DoLocalizationStringHashPatch()
@@ -393,11 +570,7 @@ def _CreateTokensPatch (originalCallable: typing.Callable, tokens_msg, *tokens) 
 
 	return originalCallable(tokens_msg, *tokens)
 
-_languageCacheFolderPath = os.path.join(This.Mod.PersistentPath, "Language Cache")  # type: str
-_gameLanguageCacheFolderPath = os.path.join(_languageCacheFolderPath, "Game")  # type: str
 
-_genderedLanguageCacheFolderPath = os.path.join(This.Mod.PersistentPath, "Gendered Language Cache")  # type: str
-_gameGenderedLanguageCacheFolderPath = os.path.join(_genderedLanguageCacheFolderPath, "Game")  # type: str
 
 _trueLocalizationStringValues = dict()  # type: typing.Dict[Localization_pb2.LocalizedString, typing.Tuple[int, tuple]]
 _trueLocalizationStringValueDeletionTimers = list()  # type: typing.List[Timer.Timer]
