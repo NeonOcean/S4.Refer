@@ -1,3 +1,9 @@
+## v1.1.1 (December 15, 2020)
+
+- Fixed bug where an exception occurs because text with one or more non-sim token appears.
+
+______________________________
+
 ## v1.1.0 (December 12, 2020)
 
 - Added support for Main's new bug reporting feature.

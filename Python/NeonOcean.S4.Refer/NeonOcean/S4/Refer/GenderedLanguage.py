@@ -313,11 +313,7 @@ def _ResolveRegularTags (text: str, tokens: typing.Sequence, languageHandler: ty
 
 	def addText (addingText: str) -> None:
 		nonlocal correctedText
-
-		if tagToken.is_female:
-			correctedText += text[uncorrectedTextStartPosition: tagStartPosition] + addingText
-		else:
-			correctedText += text[uncorrectedTextStartPosition: tagStartPosition] + addingText
+		correctedText += text[uncorrectedTextStartPosition: tagStartPosition] + addingText
 
 	def addTokenText (addingLocalizationToken) -> None:
 		nonlocal correctedText
