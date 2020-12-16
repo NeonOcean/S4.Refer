@@ -174,10 +174,11 @@ class LanguageHandlerBase:
 
 	"""
 	@classmethod
-	def AskToApplyAndFixCustomPronounSetPair (cls, modifyingSet: dict, modifyingPairIdentifier: str, chosenPairValue: str, callback: typing.Callable) -> None:
+	def AskToApplyAndFixCustomPronounSetPair (cls, modifyingSet: dict, modifyingPairIdentifier: str, chosenPairValue: str, callback: typing.Callable[[bool], None]) -> None:
 		"""
 		Show a dialog asking to do an appropriate fix to a custom pronoun set's pair value. If the user allows the fix, this function should also apply the
-		fix by modifying the 'modifyingSet' parameter. The callback parameter should be always called regardless of what the player chooses.
+		fix by modifying the 'modifyingSet' parameter. The callback parameter should be always called regardless of what the player chooses and should take a
+		single argument, true if a fix was applied and false if not.
 		"""
 
 		pass

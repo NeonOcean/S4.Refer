@@ -265,18 +265,22 @@ class EditPronounSetDialog(UISettings.DictionaryDialog):
 							 *args, **kwargs) -> None:
 
 		def editPairDialogCallback (shownEditPairDialog: ui_dialog_generic.UiDialogTextInputOkCancel) -> None:
-			if shownEditPairDialog.accepted:
-				editingPairNextValue = shownEditPairDialog.text_input_responses.get(textInputKey, editingPairCurrentValue)  # type: str
-				editingPairNextValue = editingPairNextValue.lower()
-				editingPronounSet[editingPairIdentifier] = editingPairNextValue
+			try:
+				if shownEditPairDialog.accepted:
+					editingPairNextValue = shownEditPairDialog.text_input_responses.get(textInputKey, editingPairCurrentValue)  # type: str
+					editingPairNextValue = editingPairNextValue.lower()
+					editingPronounSet[editingPairIdentifier] = editingPairNextValue
 
-				def askToApplyAndFixCallback () -> None:
+					# noinspection PyUnusedLocal
+					def askToApplyAndFixCallback (appliedFix: bool) -> None:
+						self._ShowDialogInternal(setting, currentValue, showDialogArguments = showDialogArguments, returnCallback = returnCallback, *args, **kwargs)
+
+					currentLanguageHandler = LanguageHandlers.GetCurrentLanguageHandler()  # type: LanguageHandlers.LanguageHandlerBase
+					currentLanguageHandler.AskToApplyAndFixCustomPronounSetPair(editingPronounSet, editingPairIdentifier, editingPairNextValue, askToApplyAndFixCallback)
+				else:
 					self._ShowDialogInternal(setting, currentValue, showDialogArguments = showDialogArguments, returnCallback = returnCallback, *args, **kwargs)
-
-				currentLanguageHandler = LanguageHandlers.GetCurrentLanguageHandler()  # type: LanguageHandlers.LanguageHandlerBase
-				currentLanguageHandler.AskToApplyAndFixCustomPronounSetPair(editingPronounSet, editingPairIdentifier, editingPairNextValue, askToApplyAndFixCallback)
-			else:
-				self._ShowDialogInternal(setting, currentValue, showDialogArguments = showDialogArguments, returnCallback = returnCallback, *args, **kwargs)
+			except:
+				Debug.Log("Failed to run an edit pair dialog callback.", This.Mod.Namespace, Debug.LogLevels.Exception, group = This.Mod.Namespace, owner = __name__)
 
 		editingPairParts = editingPairIdentifier.split("|")  # type: typing.List[str]
 
@@ -348,14 +352,22 @@ class EditPronounSetDialog(UISettings.DictionaryDialog):
 		def createDeleteSetCallback () -> typing.Callable:
 			# noinspection PyUnusedLocal
 			def deleteSetCallback (dialog: ui_dialog.UiDialog) -> None:
-				self._ShowDeleteSetConfirmDialog(editingPronounSetTitle, setting, currentValue, showDialogArguments, returnCallback = returnCallback, *args, **kwargs)
+				try:
+					self._ShowDeleteSetConfirmDialog(editingPronounSetTitle, setting, currentValue, showDialogArguments, returnCallback = returnCallback, *args, **kwargs)
+				except:
+					Debug.Log("Failed to run the delete set row callback.", This.Mod.Namespace, Debug.LogLevels.Exception, group = This.Mod.Namespace, owner = __name__)
 
 			return deleteSetCallback
+
+
 
 		def createEditTitleCallback () -> typing.Callable:
 			# noinspection PyUnusedLocal
 			def editTitleCallback (dialog: ui_dialog.UiDialog) -> None:
-				self._ShowEditTitleDialog(editingPronounSetContainer, setting, currentValue, showDialogArguments = showDialogArguments, returnCallback = returnCallback)
+				try:
+					self._ShowEditTitleDialog(editingPronounSetContainer, setting, currentValue, showDialogArguments = showDialogArguments, returnCallback = returnCallback)
+				except:
+					Debug.Log("Failed to run the edit title row callback.", This.Mod.Namespace, Debug.LogLevels.Exception, group = This.Mod.Namespace, owner = __name__)
 
 			return editTitleCallback
 
@@ -363,12 +375,15 @@ class EditPronounSetDialog(UISettings.DictionaryDialog):
 		def createEditPairCallback (editingPairIdentifier: str) -> typing.Callable:
 			# noinspection PyUnusedLocal
 			def editPairCallback (dialog: ui_dialog.UiDialog) -> None:
-				editingPairValue = editingPronounSet.get(editingPairIdentifier, "")
+				try:
+					editingPairValue = editingPronounSet.get(editingPairIdentifier, "")
 
-				if not isinstance(editingPairValue, str):
-					editingPairValue = ""
+					if not isinstance(editingPairValue, str):
+						editingPairValue = ""
 
-				self._ShowEditPairDialog(editingPronounSet, editingPairIdentifier, editingPairValue, setting, currentValue, showDialogArguments = showDialogArguments, returnCallback = returnCallback)
+					self._ShowEditPairDialog(editingPronounSet, editingPairIdentifier, editingPairValue, setting, currentValue, showDialogArguments = showDialogArguments, returnCallback = returnCallback)
+				except:
+					Debug.Log("Failed to run the edit pair row callback.", This.Mod.Namespace, Debug.LogLevels.Exception, group = This.Mod.Namespace, owner = __name__)
 
 			return editPairCallback
 		

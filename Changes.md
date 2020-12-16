@@ -1,3 +1,10 @@
+## v1.1.2 (December 16, 2020)
+
+- It is now again possible to modify custom pronoun sets.
+
+______________________________
+
+
 ## v1.1.1 (December 15, 2020)
 
 - Fixed bug where an exception occurs because text with one or more non-sim token appears.

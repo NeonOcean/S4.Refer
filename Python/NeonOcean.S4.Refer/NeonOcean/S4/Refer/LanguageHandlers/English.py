@@ -222,22 +222,30 @@ class EnglishLanguageHandler(LanguageHandlers.LanguageHandlerBase):
 			return simFirstName
 
 	@classmethod
-	def AskToApplyAndFixCustomPronounSetPair(cls, modifyingSet: dict, modifyingPairIdentifier: str, chosenPairValue: str, callback: typing.Callable) -> None:
-		if modifyingPairIdentifier == "she’s|he’s":
-			chosenPairValueLower = chosenPairValue.lower().replace("'", "’")
+	def AskToApplyAndFixCustomPronounSetPair(cls, modifyingSet: dict, modifyingPairIdentifier: str, chosenPairValue: str, callback: typing.Callable[[bool], None]) -> None:
+		try:
+			if modifyingPairIdentifier == "she’s|he’s":
+				chosenPairValueLower = chosenPairValue.lower().replace("'", "’")
 
-			if chosenPairValueLower == "they’re" or chosenPairValueLower == "they’ve":
-				def createFixPronounIsContractionCallback () -> typing.Callable[[bool], None]:
+				if chosenPairValueLower == "they’re" or chosenPairValueLower == "they’ve":
+					def createFixPronounIsContractionCallback () -> typing.Callable[[bool], None]:
 
-					def fixPronounIsContractionCallback (doFix: bool) -> None:
-						if doFix:
-							modifyingSet[modifyingPairIdentifier] = cls._GetTheyThemSetPronounIsContraction()
+						def fixPronounIsContractionCallback (doFix: bool) -> None:
+							if doFix:
+								modifyingSet[modifyingPairIdentifier] = cls._GetTheyThemSetPronounIsContraction()
 
-						callback()
+							callback(doFix)
 
-					return fixPronounIsContractionCallback
+						return fixPronounIsContractionCallback
 
-				cls._AskToDoTheyThemFix(createFixPronounIsContractionCallback())
+					cls._AskToDoTheyThemFix(createFixPronounIsContractionCallback())
+					return
+			else:
+				callback(False)
+		except:
+			Debug.Log("Failed to apply or ask to apply a fix to a custom pronoun set pair.", This.Mod.Namespace, Debug.LogLevels.Exception, group = This.Mod.Namespace, owner = __name__)
+			callback(False)
+
 
 	@classmethod
 	def _CreateTheyThemSet (cls) -> dict:
