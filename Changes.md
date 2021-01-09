@@ -1,3 +1,12 @@
+
+## v1.1.3 (December 9, 2020)
+
+- This mod now works correctly on Apple computers.
+- Fixed crash that occurs when certain bits of text appears.
+- Improved text handling for a few edge cases.
+
+______________________________
+
 ## v1.1.2 (December 16, 2020)
 
 - It is now again possible to modify custom pronoun sets.

@@ -72,7 +72,6 @@ PacksWithExpectedLanguageData = [
 	Sims4Common.Pack.SP18,
 	Sims4Common.Pack.SP19,
 	Sims4Common.Pack.SP20,
-
 ]
 
 LanguageCacheDirectoryPath = os.path.join(This.Mod.PersistentPath, "Language Cache")  # type: str
@@ -569,8 +568,6 @@ def _CreateTokensPatch (originalCallable: typing.Callable, tokens_msg, *tokens) 
 		Debug.Log("Failed to handle the game's 'create tokens' function.", This.Mod.Namespace, Debug.LogLevels.Exception, group = This.Mod.Namespace, owner = __name__, lockIdentifier = __name__ + ":" + str(Python.GetLineNumber()), lockThreshold = 2)
 
 	return originalCallable(tokens_msg, *tokens)
-
-
 
 _trueLocalizationStringValues = dict()  # type: typing.Dict[Localization_pb2.LocalizedString, typing.Tuple[int, tuple]]
 _trueLocalizationStringValueDeletionTimers = list()  # type: typing.List[Timer.Timer]

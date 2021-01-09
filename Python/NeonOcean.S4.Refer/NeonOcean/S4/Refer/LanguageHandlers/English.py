@@ -5,6 +5,7 @@ import os
 import typing
 
 import game_services
+import sys
 import paths
 from NeonOcean.S4.Main import Debug, Language
 from NeonOcean.S4.Main.Tools import Exceptions, Version
@@ -148,27 +149,60 @@ class EnglishLanguageHandler(LanguageHandlers.LanguageHandlerBase):
 		if pack in LanguageHandlers.NoLocalizationPackagePacks:
 			return list()
 
-		gameRootPath = os.path.dirname(os.path.dirname(  # "C:\Program Files (x86)\Origin Games\The Sims 4\Game\Bin" > "C:\Program Files (x86)\Origin Games\The Sims 4"
-			os.path.normpath(os.path.abspath(paths.APP_ROOT))  # "C:\Program Files (x86)\Origin Games\The Sims 4\Game\Bin\" > "C:\Program Files (x86)\Origin Games\The Sims 4\Game\Bin" - This is something that is done to this path in the paths module.
-		))  # type: str
+		if sys.platform.lower() == "darwin": # The game is running on a MAC pc
 
-		if pack == Sims4Common.Pack.BASE_GAME:
-			baseGameLocalizationPackageFilePath = os.path.join(gameRootPath, "Data", "Client", cls.GameLocalizationPackageFileName)  # type: str
+			# Note: In these notes "..." only means there is more to the path.
+			# This is something that is done to this path in the paths module..
+			appAndPacksRootPath = os.path.dirname(os.path.dirname(  # ".../Applications/The Sims 4.app/Contents" > ".../Applications"
+				os.path.normpath(os.path.abspath(paths.APP_ROOT))  # ".../Applications/The Sims 4.app/Contents/" > ".../Applications/The Sims 4.app/Contents
+			))  # type: str
 
-			if not os.path.exists(baseGameLocalizationPackageFilePath):
-				Debug.Log("Could not find the base game's localization package file.\nExpected Location: %s" % baseGameLocalizationPackageFilePath, This.Mod.Namespace, Debug.LogLevels.Warning, group = This.Mod.Namespace, owner = __name__)
-				return list()
+			gameAppContentsPath = os.path.normpath(os.path.abspath(paths.APP_ROOT))  # type: str
 
-			return [baseGameLocalizationPackageFilePath]
+			if pack == Sims4Common.Pack.BASE_GAME:
+				baseGameLocalizationPackageFilePath = os.path.join(gameAppContentsPath, "Data", "Client", cls.GameLocalizationPackageFileName)  # type: str
+
+				if not os.path.exists(baseGameLocalizationPackageFilePath):
+					Debug.Log("Could not find the base game's localization package file.\nExpected Location: %s" % baseGameLocalizationPackageFilePath, This.Mod.Namespace, Debug.LogLevels.Warning, group = This.Mod.Namespace, owner = __name__)
+					return list()
+
+				return [baseGameLocalizationPackageFilePath]
+
+			else:
+				packLocalizationPackageFilePath = os.path.join(appAndPacksRootPath, "The Sims 4 Packs", pack.name.upper(), cls.GameLocalizationPackageFileName)  # type: str
+
+				if not os.path.exists(packLocalizationPackageFilePath):
+					Debug.Log("Could not find a pack's localization package file.\nPack: %s\nExpected Location: %s" % (pack.name, packLocalizationPackageFilePath), This.Mod.Namespace, Debug.LogLevels.Warning, group = This.Mod.Namespace, owner = __name__)
+					return list()
+
+				return [packLocalizationPackageFilePath]
 
 		else:
-			packLocalizationPackageFilePath = os.path.join(gameRootPath, pack.name.upper(), cls.GameLocalizationPackageFileName)  # type: str # TODO revert
+			# Assume its running on Windows otherwise.
 
-			if not os.path.exists(packLocalizationPackageFilePath):
-				Debug.Log("Could not find a pack's localization package file.\nPack: %s\nExpected Location: %s" % (pack.name, packLocalizationPackageFilePath), This.Mod.Namespace, Debug.LogLevels.Warning, group = This.Mod.Namespace, owner = __name__)
-				return list()
+			# Note: In these notes "..." only means there is more to the path.
+			# This is something that is done to this path in the paths module.
+			gameRootPath = os.path.dirname(os.path.dirname(  # "...\The Sims 4\Game\Bin" > "...\The Sims 4"
+				os.path.normpath(os.path.abspath(paths.APP_ROOT))  # "...\The Sims 4\Game\Bin\" > "...\The Sims 4\Game\Bin"
+			))  # type: str
 
-			return [packLocalizationPackageFilePath]
+			if pack == Sims4Common.Pack.BASE_GAME:
+				baseGameLocalizationPackageFilePath = os.path.join(gameRootPath, "Data", "Client", cls.GameLocalizationPackageFileName)  # type: str
+
+				if not os.path.exists(baseGameLocalizationPackageFilePath):
+					Debug.Log("Could not find the base game's localization package file.\nExpected Location: %s" % baseGameLocalizationPackageFilePath, This.Mod.Namespace, Debug.LogLevels.Warning, group = This.Mod.Namespace, owner = __name__)
+					return list()
+
+				return [baseGameLocalizationPackageFilePath]
+
+			else:
+				packLocalizationPackageFilePath = os.path.join(gameRootPath, pack.name.upper(), cls.GameLocalizationPackageFileName)  # type: str
+
+				if not os.path.exists(packLocalizationPackageFilePath):
+					Debug.Log("Could not find a pack's localization package file.\nPack: %s\nExpected Location: %s" % (pack.name, packLocalizationPackageFilePath), This.Mod.Namespace, Debug.LogLevels.Warning, group = This.Mod.Namespace, owner = __name__)
+					return list()
+
+				return [packLocalizationPackageFilePath]
 
 	@classmethod
 	def GetCustomPronounSetEditableGenderTagPairs (cls) -> typing.List[str]:

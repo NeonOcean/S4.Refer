@@ -6,7 +6,7 @@ import typing
 
 from NeonOcean.S4.Main import Debug
 from NeonOcean.S4.Main.Tools import Exceptions, Python, Types
-from NeonOcean.S4.Refer import PronounSets, LanguageHandlers, PronounSettings, This
+from NeonOcean.S4.Refer import LanguageHandlers, PronounSets, PronounSettings, This
 from protocolbuffers import Localization_pb2
 from sims import sim_info
 
@@ -115,6 +115,10 @@ def CorrectGenderedSTBLText (textKey: int, text: str, tokens: typing.Sequence) -
 		return None
 
 	resolvedCorrectedText = ResolveSTBLText(correctedText, tokens)
+
+	if "{" in resolvedCorrectedText or "}" in resolvedCorrectedText:
+		Debug.Log("Some resolved text contained an invalid character ('{' or '}').\nResolved Text: %s" % resolvedCorrectedText, This.Mod.Namespace, Debug.LogLevels.Warning, group = This.Mod.Namespace, owner = __name__, lockIdentifier = __name__ + ":" + str(Python.GetLineNumber()), lockThreshold = 2)
+		return None
 
 	return resolvedCorrectedText
 
@@ -311,8 +315,38 @@ def _ResolveRegularTags (text: str, tokens: typing.Sequence, languageHandler: ty
 	correctedText = ""  # type: str
 	uncorrectedTextStartPosition = None  # type: typing.Optional[int]
 
+	def doSpecialAdjustments (adjustingText: str, specialAdjustmentIdentifiers: typing.List[str]) -> str:
+		adjustedText = adjustingText  # type: str
+
+		for specialAdjustmentIdentifier in specialAdjustmentIdentifiers:  # type: str
+			specialAdjustmentIdentifierLower = specialAdjustmentIdentifier.lower()  # type: str
+
+			# noinspection SpellCheckingInspection
+			if specialAdjustmentIdentifierLower == "xxupper":
+				adjustedText = adjustedText.upper()
+			elif specialAdjustmentIdentifierLower == "xxlower":  # I didn't actually test if this is actually possible in the base game.
+				adjustedText = adjustedText.lower()
+
+		for specialAdjustmentIdentifier in specialAdjustmentIdentifiers:  # type: str
+			specialAdjustmentIdentifierLower = specialAdjustmentIdentifier.lower()  # type: str
+
+			# noinspection SpellCheckingInspection
+			if specialAdjustmentIdentifierLower == "enan":
+				if adjustingText.startswith(("a", "e", "i", "o", "u")):
+					adjustedText = "an " + adjustedText
+				else:
+					adjustedText = "a " + adjustedText
+			elif specialAdjustmentIdentifierLower == "enhouseholdnameplural":
+				adjustedText = adjustedText + " household"
+
+		return adjustedText
+
 	def addText (addingText: str) -> None:
 		nonlocal correctedText
+
+		if len(tagTextSpecialParts) != 0:
+			addingText = doSpecialAdjustments(addingText, tagTextSpecialParts)
+
 		correctedText += text[uncorrectedTextStartPosition: tagStartPosition] + addingText
 
 	def addTokenText (addingLocalizationToken) -> None:
@@ -381,6 +415,9 @@ def _ResolveRegularTags (text: str, tokens: typing.Sequence, languageHandler: ty
 			raise _UnsupportedLocalizationStringException("The tag '%s' is an unknown tag for an object token." % tagText)
 
 		if addingText is not None:
+			if len(tagTextSpecialParts) != 0:
+				doSpecialAdjustments(addingText, tagTextSpecialParts)
+
 			addText(addingText)
 
 	# noinspection PyUnresolvedReferences
@@ -394,6 +431,10 @@ def _ResolveRegularTags (text: str, tokens: typing.Sequence, languageHandler: ty
 
 	for regularTagMatch in re.finditer(SingleTagRegularPattern, text):
 		tag, tagTokenIndexString, tagText = regularTagMatch.groups()  # type: str
+
+		tagTextParts = tagText.split("|")  # type: typing.List[str]
+		tagText = tagTextParts[0]  # type: str
+		tagTextSpecialParts = tagTextParts[1:]  # type: typing.List[str]
 
 		tagTokenIndex = int(tagTokenIndexString)  # type: int
 
@@ -427,11 +468,21 @@ def _ResolveRegularTags (text: str, tokens: typing.Sequence, languageHandler: ty
 				else:
 					raise _UnsupportedLocalizationStringException("The tag '%s' is an unknown tag for a raw text token." % tagText)
 			elif isinstance(tagToken, Localization_pb2.LocalizedString):
-				# noinspection PyUnresolvedReferences
-				tagTokenText = _allLocalizationStrings.get(tagToken.hash, None)  # type: typing.Optional[str]
+				if tagText == "String":
+					# noinspection PyUnresolvedReferences
+					tagTokenText = GetLocalizationStringText(tagToken.hash)  # type: typing.Optional[str]
 
-				if tagTokenText is not None:
-					addText(tagTokenText)
+					if tagTokenText is not None:
+						# noinspection PyUnresolvedReferences
+						correctedTagTokenText = ResolveSTBLText(tagTokenText, tuple(tagToken.tokens))  # Any gendered language tags would have already been resolved, it's fine that gendered tokens aren't handled.
+
+						if correctedTagTokenText is not None:
+							addText(correctedTagTokenText)
+				else:
+					raise _UnsupportedLocalizationStringException("The tag '%s' is an unknown tag for a localization string token." % tagText)
+			elif isinstance(tagToken, Localization_pb2.LocalizedStringToken):
+				# noinspection PyTypeChecker
+				addTokenText(tagToken)
 			else:
 				raise _UnsupportedLocalizationStringException("Unsupported token type '%s'." % Types.GetFullName(tagToken))
 
